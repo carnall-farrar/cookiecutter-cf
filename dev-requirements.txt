@@ -1,20 +1,15 @@
 -e .
 
 ansi2html
-black
+ruff
 build
 chardet
-flake8
-isort
 mkdocs
 mkdocs-material
 mkdocs-gen-files
 mkdocs-include-markdown-plugin
 pexpect
-pipenv
 pytest
 termynal
 twine
 uv
-virtualenvwrapper; sys_platform != 'win32'
-virtualenvwrapper-win; sys_platform == 'win32'

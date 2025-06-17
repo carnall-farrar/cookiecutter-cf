@@ -16,13 +16,3 @@ PROCESSED_DATA_DIR = DATA_DIR / "processed"
 OUTPUT_DATA_DIR = DATA_DIR / "output"
 
 FIGURES_DIR = PROJ_ROOT / "figures"
-
-# If tqdm is installed, configure loguru with tqdm.write
-# https://github.com/Delgan/loguru/issues/135
-try:
-    from tqdm import tqdm
-
-    logger.remove(0)
-    logger.add(lambda msg: tqdm.write(msg, end=""), colorize=True)
-except ModuleNotFoundError:
-    pass

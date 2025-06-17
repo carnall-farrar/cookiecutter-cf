@@ -1,7 +1,6 @@
 # Contributing
 
 Contributions are welcome, and they are greatly appreciated!
-Every little bit helps, and credit will always be given.
 
 You can contribute in many ways:
 
@@ -9,11 +8,10 @@ You can contribute in many ways:
 
 ## Report Bugs
 
-Report bugs at <https://github.com/fpgmaas/cookiecutter-uv/issues
+Report bugs at <https://github.com/carnall-farrar/cookiecutter-cf/issues
 
 If you are reporting a bug, please include:
 
-- Your operating system name and version.
 - Any details about your local setup that might be helpful in troubleshooting.
 - Detailed steps to reproduce the bug.
 
@@ -29,43 +27,39 @@ Anything tagged with "enhancement" and "help wanted" is open to whoever wants to
 
 ## Write Documentation
 
-Cookiecutter PyPackage could always use more documentation, whether as part of the official docs, in docstrings, or even on the web in blog posts, articles, and such.
+This package could always use more documentation, whether as part of the official docs or in docstrings.
 
 ## Submit Feedback
 
-The best way to send feedback is to file an issue at <https://github.com/fpgmaas/cookiecutter-uv/issues.
+The best way to send feedback is to file an issue at <https://github.com/carnall-farrar/cookiecutter-cf/issues.
 
 If you are proposing a new feature:
 
 - Explain in detail how it would work.
 - Keep the scope as narrow as possible, to make it easier to implement.
-- Remember that this is a volunteer-driven project, and that contributions are welcome :)
 
 # Get Started!
 
-Ready to contribute? Here\'s how to set up `cookiecutter-uv` for local development.
-Please note this documentation assumes you already have `uv` and `git` installed and ready to go.
+Here's how to set up `cookiecutter-cf` for local development.
+Please note this documentation assumes you already have `conda`, `uv`, and `git` installed and ready to go.
 
-1. Fork the `cookiecutter-uv` repo on GitHub.
-
-2. Clone your fork locally:
+1. Clone the repo locally:
 
 ```bash
-cd <directory_in_which_repo_should_be_created
-git clone git@github.com:YOUR_NAME/cookiecutter-uv.git
+git clone https://github.com/carnall-farrar/cookiecutter-cf.git
 ```
 
-3. Now we need to install the environment.
+2. Now we need to install the environment.
    Navigate into the project directory:
 
 ```bash
-cd cookiecutter-uv
+cd cookiecutter-cf
 ```
 
-Then, install and activate the environment with:
+Create a conda virtual environment and install the necessary packages to run the project with one convenient `make` command:
 
 ```bash
-uv sync
+make create_environment
 ```
 
 4. Install pre-commit to run linters/formatters at commit time:

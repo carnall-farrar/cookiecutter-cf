@@ -1,51 +1,47 @@
 # {{cookiecutter.project_name}}
 
-<a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
-    <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
-</a>
+[![Python Version](https://img.shields.io/badge/python-3.8%7C3.9%7C3.10%7C3.11-blue?style=for-the-badge&logo=python)](pyproject.toml)
+[![Docs](https://img.shields.io/badge/docs-gh--pages-blue)](https://www.mkdocs.org/)
+[![Cookiecutter-CF](https://img.shields.io/badge/Cookiecutter--CF-red?style=plastic)](https://github.com/carnall-farrar/cookiecutter-cf/)
+
 
 {{cookiecutter.description}}
 
-## Project Organization
+## Project Context/Background
+
+_Comprehensively detail the project context here._
+
+## Repository Organization
 
 ```
-├── Makefile           <- Makefile with convenience commands like `make data` or `make train`
-├── README.md          <- The top-level README for developers using this project.
+├── Makefile                    <- Makefile with convenience commands
+├── README.md                   <- The top-level README for developers using this project.
 ├── data
-│   ├── external       <- Data from third party sources.
-│   ├── interim        <- Intermediate data that has been transformed.
-│   ├── processed      <- The final, canonical data sets for modeling.
-│   └── raw            <- The original, immutable data dump.
+│   ├── output                  <- The final, canonical data sets.
+│   ├── processed               <- Intermediate data that has been transformed.
+│   └── raw                     <- The original, immutable data dump.
 │
-├── docs               <- A default mkdocs project; see www.mkdocs.org for details
+├── docs                        <- A default mkdocs project; see www.mkdocs.org for details
 │
-├── models             <- Trained and serialized models, model predictions, or model summaries
+├── pyproject.toml              <- Project configuration file with package metadata for 
+│                                  {{ cookiecutter.module_name }} and configuration for tools like black
 │
-├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-│                         the creator's initials, and a short `-` delimited description, e.g.
-│                         `1.0-jqp-initial-data-exploration`.
+├── .pre-commit-config.yaml     <- Hooks that run prior to a git commit command
+│ 
+├── mkdocs.yml                  <- Configuration file for the mkdocs project
 │
-├── pyproject.toml     <- Project configuration file with package metadata for 
-│                         {{ cookiecutter.module_name }} and configuration for tools like black
+├── figures                     <- Generated graphics and figures to be used in reporting
 │
-├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-│
-├── figures            <- Generated graphics and figures to be used in reporting
-│
-├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-│                         generated with `pip freeze > requirements.txt`
-│
-├── setup.cfg          <- Configuration file for flake8
-│
-└── {{ cookiecutter.module_name }}   <- Source code for use in this project.
-    │
-    ├── __init__.py             <- Makes {{ cookiecutter.module_name }} a Python module
-    │
-    ├── config.py               <- Store useful variables and configuration
-    │
-    ├── dataset.py              <- Scripts to download or generate data
-    │
-    ├── features.py             <- Code to create features for modeling
+└── src
+    └── {{ cookiecutter.module_name }}   <- Source code for use in this project.
+        │
+        ├── __init__.py             <- Makes {{ cookiecutter.module_name }} a Python module
+        │
+        ├── config.py               <- Store useful variables and configuration
+        │
+        ├── utilities.py            <- Useful utilities
+        │
+        └── foo.py                  <- Dummy script
 ```
 
 --------

@@ -1,6 +1,12 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/{{cookiecutter.module_name}}/__init__.py"
+
 [project]
 name = "{{cookiecutter.project_name}}"
-version = "0.0.1"
 description = "{{cookiecutter.project_description}}"
 authors = [{ name = "{{cookiecutter.author}}", email = "{{cookiecutter.email}}" }]
 readme = "README.md"
@@ -17,45 +23,41 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
+dependencies = [
+    "awscli",
+    "jinja2",
+    "jupyterlab",
+    "loguru",
+    "mkdocs>=1.4.2",
+    "mkdocs-material>=8.5.10",
+    "mkdocstrings[python]>=0.26.1",
+    "numpy",
+    "pandas",
+    "pip",
+    "plotly",
+    "pre-commit>=2.20.0",
+    "pyathena",
+    "pytest>=7.2.0",
+    "pytest-cov",
+    "python-dotenv",
+    "ruff",
+    "scikit-learn",
+    "seaborn",
+    "uv",
+]
 
 [project.urls]
 Homepage = "https://{{cookiecutter.author_github_handle}}.github.io/{{cookiecutter.project_name}}/"
 Repository = "https://github.com/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}"
 Documentation = "https://{{cookiecutter.author_github_handle}}.github.io/{{cookiecutter.project_name}}/"
 
-[dependency-groups]
-dev = [
-    "pytest>=7.2.0",
-    "pre-commit>=2.20.0",
-    "mypy>=0.991",
-    "pytest-cov>=4.0.0",
-    "ruff>=0.11.5",
-    "mkdocs>=1.4.2",
-    "mkdocs-material>=8.5.10",
-    "mkdocstrings[python]>=0.26.1",
-]
-
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
 [tool.hatch.build.targets.wheel]
-packages = ["src/{{cookiecutter.project_slug}}"]
-
-[tool.mypy]
-files = [
-    "src"
-]
-disallow_untyped_defs = true
-disallow_any_unimported = true
-no_implicit_optional = true
-check_untyped_defs = true
-warn_return_any = true
-warn_unused_ignores = true
-show_error_codes = true
+packages = ["src/{{cookiecutter.module_name}}"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = "src"
+addopts = "--cov=tests --cov-report html"
 
 [tool.ruff]
 line-length = 120
@@ -106,12 +108,3 @@ ignore = [
 
 [tool.ruff.format]
 preview = true
-
-[tool.coverage.report]
-skip_empty = true
-
-[tool.coverage.run]
-branch = true
-source = [
-    "src"
-]
