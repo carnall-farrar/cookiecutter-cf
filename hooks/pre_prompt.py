@@ -8,5 +8,8 @@ with Path("cookiecutter.json") as config:
     
     # Set the initial version to today's date
     data["version"] = date.today().strftime("%Y.%m.%d")
+
+    # Set `carnall-farrar` as the default github organisation
+    data["github_org"] = "carnall-farrar"
     
     config.write_text(json.dumps(data, indent=4))

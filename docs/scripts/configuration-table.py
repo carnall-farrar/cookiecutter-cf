@@ -67,7 +67,7 @@ def build_help_table_rows(data, help_lookup, lookup_prefix=""):
             item_help = help_lookup[f"{lookup_prefix}{top_key}"]
 
             #  simplify template render string
-            if m := re.search(r"{{ cookiecutter\.(.*) }}", top_value):
+            if m := re.search(r"{{cookiecutter\.(.*)}}", top_value):
                 top_value = f"`{m.group(1)}`"
 
             section = _new_section(

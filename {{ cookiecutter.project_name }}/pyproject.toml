@@ -7,8 +7,8 @@ version-file = "src/{{cookiecutter.module_name}}/__init__.py"
 
 [project]
 name = "{{cookiecutter.project_name}}"
-description = "{{cookiecutter.project_description}}"
-authors = [{ name = "{{cookiecutter.author}}", email = "{{cookiecutter.email}}" }]
+description = "{{cookiecutter.description}}"
+authors = [{ name = "{{cookiecutter.author}}"}]
 readme = "README.md"
 keywords = ['python']
 requires-python = ">=3.9,<4.0"
@@ -47,9 +47,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://{{cookiecutter.author_github_handle}}.github.io/{{cookiecutter.project_name}}/"
-Repository = "https://github.com/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}"
-Documentation = "https://{{cookiecutter.author_github_handle}}.github.io/{{cookiecutter.project_name}}/"
+Homepage = "https://{{cookiecutter.github_org}}.github.io/{{cookiecutter.project_name}}/"
+Repository = "https://github.com/{{cookiecutter.github_org}}/{{cookiecutter.project_name}}"
+Documentation = "https://{{cookiecutter.github_org}}.github.io/{{cookiecutter.project_name}}/"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/{{cookiecutter.module_name}}"]

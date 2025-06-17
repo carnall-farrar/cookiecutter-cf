@@ -2,7 +2,7 @@
 # GLOBALS                                                                       #
 #################################################################################
 
-PROJECT_NAME = {{ cookiecutter.project_name }}
+PROJECT_NAME = {{cookiecutter.project_name}}
 PYTHON_VERSION = 3.10
 PYTHON_INTERPRETER = python
 
@@ -50,22 +50,6 @@ format:
 .PHONY: test
 test:
 	python -m pytest --cov --cov-config=pyproject.toml
-
-{% if not cookiecutter.dataset_storage.none %}
-## Download Data from storage system
-.PHONY: sync_data_down
-sync_data_down:
-	{% if cookiecutter.dataset_storage.s3 -%}
-	aws s3 sync s3://{{ cookiecutter.dataset_storage.s3.bucket }}/data/ data/ {% if cookiecutter.dataset_storage.s3.aws_profile != 'default' %} --profile {{ cookiecutter.dataset_storage.s3.aws_profile }}{% endif %}
-	{% endif %}
-
-## Upload Data to storage system
-.PHONY: sync_data_up
-sync_data_up:
-	{% if cookiecutter.dataset_storage.s3 -%}
-	aws s3 sync data/ s3://{{ cookiecutter.dataset_storage.s3.bucket }}/data {% if cookiecutter.dataset_storage.s3.aws_profile != 'default' %} --profile {{ cookiecutter.dataset_storage.s3.aws_profile }}{% endif %}
-	{% endif %}
-{% endif %}
 
 ## Test if documentation can be built without warnings or errors
 .PHONY: docs-test

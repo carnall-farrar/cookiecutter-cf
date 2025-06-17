@@ -1,19 +1,19 @@
 # Contributing
 
-Here's how to set up `{{ cookiecutter.project_name }}` for local development.
+Here's how to set up `{{cookiecutter.project_name}}` for local development.
 Please note this documentation assumes you already have `conda`, `uv`, and `git` installed and ready to go.
 
 1. Clone the repo locally:
 
 ```bash
-git clone https://github.com/carnall-farrar/{{ cookiecutter.project_name }}.git
+git clone https://github.com/carnall-farrar/{{cookiecutter.project_name}}.git
 ```
 
 2. Now we need to install the environment.
    Navigate into the project directory:
 
 ```bash
-cd {{ cookiecutter.project_name }}
+cd {{cookiecutter.project_name}}
 ```
 
 Create a conda virtual environment and install the necessary packages to run the project with one convenient `make` command:

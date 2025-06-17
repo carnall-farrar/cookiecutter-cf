@@ -56,7 +56,7 @@ The directory structure of your new project will look like this:
 ├── docs                        <- A default mkdocs project; see www.mkdocs.org for details
 │
 ├── pyproject.toml              <- Project configuration file with package metadata for 
-│                                  {{ cookiecutter.module_name }} and configuration for tools like black
+│                                  {{cookiecutter.module_name}} and configuration for tools like black
 │
 ├── .pre-commit-config.yaml     <- Hooks that run prior to a git commit command
 │ 
@@ -65,9 +65,9 @@ The directory structure of your new project will look like this:
 ├── figures                     <- Generated graphics and figures to be used in reporting
 │
 └── src
-    └── {{ cookiecutter.module_name }}   <- Source code for use in this project.
+    └── {{cookiecutter.module_name}}   <- Source code for use in this project.
         │
-        ├── __init__.py             <- Makes {{ cookiecutter.module_name }} a Python module
+        ├── __init__.py             <- Makes {{cookiecutter.module_name}} a Python module
         │
         ├── config.py               <- Store useful variables and configuration
         │

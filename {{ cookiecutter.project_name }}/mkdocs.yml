@@ -1,5 +1,5 @@
-site_name: {{ cookiecutter.project_name }}
-site_author: {{ cookiecutter.author_name }}
+site_name: {{cookiecutter.project_name}}
+site_author: {{cookiecutter.author}}
 
 nav:
   - Home: index.md
@@ -41,7 +41,7 @@ theme:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}
+      link: https://github.com/{{cookiecutter.github_org}}/{{cookiecutter.project_name}}
     - icon: fontawesome/brands/python
       link: https://pypi.org/project/{{cookiecutter.project_name}}
 
