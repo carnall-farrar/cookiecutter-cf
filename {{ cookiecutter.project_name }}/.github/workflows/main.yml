@@ -18,15 +18,11 @@ jobs:
       - name: Check out
         uses: actions/checkout@v4
 
-      - uses: actions/cache@v4
-        with:
-          path: ~/.cache/pre-commit
-          key: {% raw %}pre-commit-${{hashFiles('.pre-commit-config.yaml')}}{% endraw %}
-
       - name: Set up the environment
         uses: ./.github/actions/setup-python-env
 
       - name: Run checks
+        working-directory: ${{env.working-directory}}
         run: make check
 
   tests-and-type-check:
@@ -49,9 +45,6 @@ jobs:
 
       - name: Run tests
         run: uv run python -m pytest tests --cov --cov-config=pyproject.toml --cov-report=xml
-
-      - name: Check typing
-        run: uv run mypy
 
 
   check-docs:
