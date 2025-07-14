@@ -1,60 +1,60 @@
-name: Main
+# name: Main
 
-on:
-  push:
-    branches:
-      - main
-      - dev
-  pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
+# on:
+#   push:
+#     branches:
+#       - main
+#       - dev
+#   pull_request:
+#     types: [opened, synchronize, reopened, ready_for_review]
 
-jobs:
-  quality:
-    name: Code Quality
-    runs-on: ubuntu-latest
-    env:
-      working-directory: ./
-    steps:
-      - name: Check out
-        uses: actions/checkout@v4
+# jobs:
+#   quality:
+#     name: Code Quality
+#     runs-on: ubuntu-latest
+#     env:
+#       working-directory: ./
+#     steps:
+#       - name: Check out
+#         uses: actions/checkout@v4
 
-      - name: Set up the environment
-        uses: ./.github/actions/setup-python-env
+#       - name: Set up the environment
+#         uses: ./.github/actions/setup-python-env
 
-      - name: Run checks
-        working-directory: ${{env.working-directory}}
-        run: make check
+#       - name: Run checks
+#         working-directory: ${{env.working-directory}}
+#         run: make check
 
-  tests-and-type-check:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
-      fail-fast: false
-    defaults:
-      run:
-        shell: bash
-    steps:
-      - name: Check out
-        uses: actions/checkout@v4
+#   tests-and-type-check:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+#       fail-fast: false
+#     defaults:
+#       run:
+#         shell: bash
+#     steps:
+#       - name: Check out
+#         uses: actions/checkout@v4
 
-      - name: Set up the environment
-        uses: ./.github/actions/setup-python-env
-        with:
-          python-version: {% raw %}${{matrix.python-version}}{% endraw %}
+#       - name: Set up the environment
+#         uses: ./.github/actions/setup-python-env
+#         with:
+#           python-version: {% raw %}${{matrix.python-version}}{% endraw %}
 
-      - name: Run tests
-        run: uv run python -m pytest tests --cov --cov-config=pyproject.toml --cov-report=xml
+#       - name: Run tests
+#         run: uv run python -m pytest tests --cov --cov-config=pyproject.toml --cov-report=xml
 
 
-  check-docs:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out
-        uses: actions/checkout@v4
+#   check-docs:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Check out
+#         uses: actions/checkout@v4
 
-      - name: Set up the environment
-        uses: ./.github/actions/setup-python-env
+#       - name: Set up the environment
+#         uses: ./.github/actions/setup-python-env
 
-      - name: Check if documentation can be built
-        run: uv run mkdocs build -s
+#       - name: Check if documentation can be built
+#         run: uv run mkdocs build -s

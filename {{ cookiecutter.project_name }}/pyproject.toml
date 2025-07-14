@@ -57,7 +57,7 @@ packages = ["src/{{cookiecutter.module_name}}"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = "src"
-addopts = "--cov=tests --cov-report html"
+addopts = "--cov=src --cov-report html"
 
 [tool.ruff]
 line-length = 120
