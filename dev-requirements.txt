@@ -1,0 +1,15 @@
+-e .
+
+ansi2html
+ruff
+build
+chardet
+mkdocs
+mkdocs-material
+mkdocs-gen-files
+mkdocs-include-markdown-plugin
+pexpect
+pytest
+termynal
+twine
+uv

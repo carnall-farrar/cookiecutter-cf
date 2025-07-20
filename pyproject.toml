@@ -1,0 +1,40 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.module]
+name = "cookiecutter-cf"
+
+[project]
+name = "cookiecutter-cf"
+version = "2.2.0"
+description = "A template for setting up GitHub repositories for CF projects."
+authors = [
+  { name = "Dike Aduluso", email = "dike.aduluso@carnallfarrar.com" },
+]
+readme = "README.md"
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+requires-python = ">=3.9"
+dependencies = [
+  "click",
+  "cookiecutter",
+  "tomlkit",
+]
+
+[project.urls]
+"Homepage" = "https://cookiecutter-data-science.drivendata.org/"
+"Source Code" = "https://github.com/carnall-farrar/cookiecutter-cf"
+"Bug Tracker" = "https://github.com/carnall-farrar/cookiecutter-cf/issues"

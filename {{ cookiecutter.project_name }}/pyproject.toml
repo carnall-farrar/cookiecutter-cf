@@ -1,0 +1,110 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/{{cookiecutter.module_name}}/__init__.py"
+
+[project]
+name = "{{cookiecutter.project_name}}"
+description = "{{cookiecutter.description}}"
+authors = [{ name = "{{cookiecutter.author}}"}]
+readme = "README.md"
+keywords = ['python']
+requires-python = ">=3.9,<4.0"
+classifiers = [
+    "Intended Audience :: Developers",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "awscli",
+    "jinja2",
+    "jupyterlab",
+    "loguru",
+    "mkdocs>=1.4.2",
+    "mkdocs-material>=8.5.10",
+    "mkdocstrings[python]>=0.26.1",
+    "numpy",
+    "pandas",
+    "pip",
+    "plotly",
+    "pre-commit>=2.20.0",
+    "pyathena",
+    "pytest>=7.2.0",
+    "pytest-cov",
+    "python-dotenv",
+    "ruff",
+    "scikit-learn",
+    "seaborn",
+    "uv",
+]
+
+[project.urls]
+Homepage = "https://{{cookiecutter.github_org}}.github.io/{{cookiecutter.project_name}}/"
+Repository = "https://github.com/{{cookiecutter.github_org}}/{{cookiecutter.project_name}}"
+Documentation = "https://{{cookiecutter.github_org}}.github.io/{{cookiecutter.project_name}}/"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/{{cookiecutter.module_name}}"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = "src"
+addopts = "--cov=src --cov-report html"
+
+[tool.ruff]
+line-length = 120
+fix = true
+
+[tool.ruff.lint]
+select = [
+    # flake8-2020
+    "YTT",
+    # flake8-bandit
+    "S",
+    # flake8-bugbear
+    "B",
+    # flake8-builtins
+    "A",
+    # flake8-comprehensions
+    "C4",
+    # flake8-debugger
+    "T10",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    # mccabe
+    "C90",
+    # pycodestyle
+    "E", "W",
+    # pyflakes
+    "F",
+    # pygrep-hooks
+    "PGH",
+    # pyupgrade
+    "UP",
+    # ruff
+    "RUF",
+    # tryceratops
+    "TRY",
+]
+ignore = [
+    # LineTooLong
+    "E501",
+    # DoNotAssignLambda
+    "E731",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
+
+[tool.ruff.format]
+preview = true
