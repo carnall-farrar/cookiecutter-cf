@@ -7,7 +7,7 @@ name = "cookiecutter-cf"
 
 [project]
 name = "cookiecutter-cf"
-version = "0.0.1"
+version = "0.0.2"
 description = "A template for setting up GitHub repositories for CF projects."
 authors = [
   { name = "Dike Aduluso", email = "dike.aduluso@carnallfarrar.com" },
