@@ -20,7 +20,11 @@ _Comprehensively detail the project context here._
 │   ├── output                  <- The final, canonical data sets.
 │   ├── processed               <- Intermediate data that has been transformed.
 │   └── raw                     <- The original, immutable data dump.
-│
+|
+├── notebooks                   <- Jupyter notebooks. Naming convention is a number (for ordering),
+│                                  the creator's initials, and a short `-` delimited description, e.g.
+│                                  `1.0-jqp-initial-data-exploration`.
+|
 ├── docs                        <- A default mkdocs project; see www.mkdocs.org for details
 │
 ├── pyproject.toml              <- Project configuration file with package metadata for 
