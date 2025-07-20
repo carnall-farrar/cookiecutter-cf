@@ -1,0 +1,53 @@
+site_name: Cookiecutter CF
+site_description: A template for setting up GitHub repositories for CF projects.
+site_url: https://cookiecutter-data-science.drivendata.org
+repo_url: https://github.com/carnall-farrar/cookiecutter-cf
+copyright: Maintained by Dike Aduluso.
+
+nav:
+  - Home: index.md
+  - Why cookitcutter-cf?: why.md
+  - Opinions: opinions.md
+  - Contributing: contributing.md
+
+extra:
+  analytics:
+    provider: google
+    property: G-DX14MC19WY
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+
+plugins:
+  - include-markdown
+  - search
+
+extra_css:
+  - stylesheets/extra.css
+
+theme:
+  name: material
+  feature:
+    tabs: true
+  palette:
+    # Note: Using the system theme works with the insiders version
+    # https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/#automatic-light-dark-mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: astral-light
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: astral-dark
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+  icon:
+    repo: fontawesome/brands/github

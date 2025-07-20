@@ -81,7 +81,6 @@ The directory structure of your new project will look like this:
 ```
 
 
-
 ## Acknowledgements
 
 This project is partially based on the following templates:
