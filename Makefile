@@ -18,10 +18,10 @@ create_environment:
 	@echo "🚀 Creating a virtual environment using conda"
 	conda create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -y
 	@echo ">>> A conda environment named $(PROJECT_NAME) has been created"
-	conda activate $(PROJECT_NAME)
-	uv pip compile pyproject.toml -o requirements.txt
-	uv pip install -r requirements.txt
-	pre-commit install
+	@bash -c "source $$(conda info --base)/etc/profile.d/conda.sh && conda activate $(PROJECT_NAME) && \
+	uv pip compile pyproject.toml -o requirements.txt && \
+	uv pip install -r requirements.txt && \
+	pre-commit install"
 
 ## Install Python dependencies
 .PHONY: requirements
