@@ -1,38 +1,46 @@
-.PHONY: _prep create_environment requirements format lint docs docs-serve test \
-	test-fastest test-debug-fastest _clean_manual_test manual-test manual-test-debug
-
-## GLOBALS
+#################################################################################
+# GLOBALS                                                                       #
+#################################################################################
 
 PROJECT_NAME = cookiecutter-cf
 PYTHON_VERSION = 3.10
 PYTHON_INTERPRETER = python
 
-
-###     UTILITIES
-_prep:
-	rm -f **/*/.DS_store
-
+#################################################################################
+# COMMANDS                                                                      #
+#################################################################################
 
 ###     DEV COMMANDS
 
-## Set up python interpreter environment
+## Set up Python interpreter environment
+.PHONY: create_environment
 create_environment:
+	@echo "🚀 Creating a virtual environment using conda"
 	conda create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -y
-	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"
+	@echo ">>> A conda environment named $(PROJECT_NAME) has been created"
+	conda activate $(PROJECT_NAME)
+	uv pip compile pyproject.toml -o requirements.txt
+	uv pip install -r requirements.txt
+	pre-commit install
 
-## Install Python Dependencies
+## Install Python dependencies
+.PHONY: requirements
 requirements:
-	$(PYTHON_INTERPRETER) -m pip install -r dev-requirements.txt
+	uv pip compile pyproject.toml -o requirements.txt
+	uv pip install -r requirements.txt
+	pre-commit install
 
-## Format the code using isort and black
-format:
-	isort --profile black ccds hooks tests docs/scripts
-	black ccds hooks tests docs/scripts
-
+## Lint using ruff (use `make format` to do formatting)
+.PHONY: lint
 lint:
-	flake8 ccds hooks tests docs/scripts
-	isort --check --profile black ccds hooks tests docs/scripts
-	black --check ccds hooks tests docs/scripts
+	ruff format --check
+	ruff check
+
+## Format source code with ruff
+.PHONY: format
+format:
+	ruff check --fix
+	ruff format
 
 clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
 
@@ -59,33 +67,40 @@ dist: clean ## builds source and wheel package
 	python -m build
 	ls -l dist
 
+###     TESTS
+
+## Run tests
+.PHONY: test
+test:
+	python -m pytest --cov --cov-config=pyproject.toml
 
 ###     DOCS
 
-docs:
-	cd docs && mkdocs build
+## Test if documentation can be built without warnings or errors
+.PHONY: docs-test
+docs-test:
+	cd docs && mkdocs build -s
 
-docs-serve:
+## Build and serve the documentation
+.PHONY: docs
+docs:
 	cd docs && mkdocs serve
 
-###     TESTS
 
-test: _prep
-	pytest -vvv --durations=0 tests
+#################################################################################
+# Self Documenting Commands                                                     #
+#################################################################################
 
-test-fastest: _prep
-	pytest -vvv -FFF
+.DEFAULT_GOAL := help
 
-test-debug-last:
-	pytest --lf --pdb
+define PRINT_HELP_PYSCRIPT
+import re, sys; \
+lines = '\n'.join([line for line in sys.stdin]); \
+matches = re.findall(r'\n## (.*)\n[\s\S]+?\n([a-zA-Z_-]+):', lines); \
+print('Available rules:\n'); \
+print('\n'.join(['{:25}{}'.format(*reversed(match)) for match in matches]))
+endef
+export PRINT_HELP_PYSCRIPT
 
-_clean_manual_test:
-	rm -rf manual_test
-
-manual-test: _prep _clean_manual_test
-	mkdir -p manual_test
-	cd manual_test && python -m ccds ..
-
-manual-test-debug: _prep _clean_manual_test
-	mkdir -p manual_test
-	cd manual_test && python -m pdb ../ccds/__main__.py ..
+help:
+	@$(PYTHON_INTERPRETER) -c "${PRINT_HELP_PYSCRIPT}" < $(MAKEFILE_LIST)
