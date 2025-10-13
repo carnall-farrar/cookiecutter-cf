@@ -2,7 +2,7 @@
 
 The default project structure reflects certain opinions about how to do collaborative data science work. These opinions grew out of our own experiences with what works and what doesn't. Some of these opinions are about workflows, and others are about tools that can make the process easier. These opinions are discussed below. If you have any thoughts, please [contribute or share them](contributing.md).
 
-### Data analysis is a directed acyclic graph
+## 1. Data analysis is a directed acyclic graph
 
 _Don't ever edit your raw data. Especially not manually. And especially not in Excel._
 
@@ -36,7 +36,7 @@ DAGs are so common in data and software processes that many tools have been buil
 
 There are other tools for managing DAGs that are written in Python, instead of their own language. Popular ones include [Airflow](https://airflow.apache.org/index.html), [Luigi](https://luigi.readthedocs.org/en/stable/index.html), [Snakemake](https://snakemake.readthedocs.io/en/stable/), [Prefect](https://github.com/PrefectHQ/prefect), [Dagster](https://github.com/dagster-io/dagster), and [Joblib](https://joblib.readthedocs.io/en/latest/memory.html). Feel free to use these if they are more appropriate for your analysis.
 
-## Notebooks are for exploration and communication, source files are for repetition
+## 2. Notebooks are for exploration and communication, source files are for repetition
 
 > Source code is superior for replicability because it is more portable, can be tested more easily, and is easier to code review.
 
@@ -48,14 +48,8 @@ Notebooks are to be stored exclusively in the `notebooks/` directory. When we us
 
 Don't write code to do the same task in multiple notebooks. If it's a data preprocessing task, put it in the pipeline at `{{cookiecutter.module_name}}/data/make_dataset.py` and load data from `data/processed/`. If it's useful utility code, refactor it to `{{cookiecutter.module_name}}`. Classic signs that you are ready to move from a notebook to source code include duplicating old notebooks to start new ones, copy/pasting functions between notebooks, and creating object-oriented classes within notebooks.
 
-## Keep your modeling organized
 
-Different modeling pipelines are different, so we don't provide a lot of baked-in structure to the `models/` directory. However, documenting modeling experiments is critical to enable reproducibility, continuous learning, and improvement. You should implement experiment documentation procedures that enable you to, at minimum, identify the provenance of the data and the version of the code that the experiment used, as well as the metrics used to measure performance.
-
-For smaller projects, it's fine to start with homegrown tracking using file formats like JSON that are both human- and machine-readable. You can graduate to experiment tracking tools (e.g., [MLflow](https://mlflow.org/)) if it's warranted or if they're standard for your team.
-
-
-## Build from the environment up
+## 3. Build from the environment up
 
 The first step in reproducing an analysis is always replicating the computational environment it was run in. You need the same tools, the same libraries, and the same versions to make everything play nicely together.
 
@@ -65,7 +59,7 @@ For data science work, we prefer to use the **conda** package manager because it
 
 If you have more complex requirements for recreating your environment, consider a virtual machine based approach such as [Docker](https://www.docker.com/). This tool uses a text-based format (Dockerfile) that you can easily add to source control to describe how to create a virtual machine with the requirements you need.
 
-## Keep secrets and configuration out of version control
+## 4. Keep secrets and configuration out of version control
 
 You _really_ don't want to leak your AWS secret key on Github—see the [Twelve Factor App](https://12factor.net/config) principles on this point. Here's one way to do this:
 
@@ -83,7 +77,7 @@ OTHER_VARIABLE=something
 
 ### Use a package to load these variables automatically.
 
-If you look at the stub script in `{{cookiecutter.module_name}}/data/make_dataset.py`, it uses a package called [python-dotenv](https://github.com/theskumar/python-dotenv) to load up all the entries in this file as environment variables so they are accessible with `os.environ.get`. Here's an example snippet adapted from the `python-dotenv` documentation:
+If you look at `{{cookiecutter.module_name}}/config.py`, it uses a package called [python-dotenv](https://github.com/theskumar/python-dotenv) to load up all the entries in this file as environment variables so they are accessible with `os.environ.get`. Here's an example snippet adapted from the `python-dotenv` documentation:
 
 ```python
 # {{cookiecutter.module_name}}/data/dotenv_example.py
@@ -99,41 +93,3 @@ load_dotenv(dotenv_path)
 database_url = os.environ.get("DATABASE_URL")
 other_variable = os.environ.get("OTHER_VARIABLE")
 ```
-
-### AWS CLI configuration
-
-When using Amazon S3 to store data, a simple method of managing AWS access is to set your access keys to environment variables. However, managing mutiple sets of keys on a single machine (e.g. when working on multiple projects) it is best to use a [credentials file](https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html), typically located in `~/.aws/credentials`. A typical file might look like:
-```
-[default]
-aws_access_key_id=myaccesskey
-aws_secret_access_key=mysecretkey
-
-[another_project]
-aws_access_key_id=myprojectaccesskey
-aws_secret_access_key=myprojectsecretkey
-```
-
-You can add the profile name when initialising a project; assuming no applicable environment variables are set, the profile credentials will be used be default.
-
-## Encourage adaptation from a consistent default
-
-To keep this structure broadly applicable for many different kinds of projects, we think the best approach is to be liberal in changing the folders around for _your_ project, but be conservative in modifying the default cookiecutter structure for _all_ projects.
-
-We've created a <span class="label label-info">folder-layout</span> label specifically for issues proposing to add, subtract, rename, or move folders around. More generally, we've also created a <span class="label label-warning">needs-discussion</span> label for issues that should have some careful discussion and broad support before being implemented.
-
-### Examples of template adaptation and evolution
-
-A project's organizational needs may differ from the start and can change over time. Here are some examples of directions to go in evolving your project structure. 
-
-#### Example 1: Simplifying
-
-Some projects don't require multiple sub-directories to organize their module code. When a few python files can effectively accomplish all that is required, flattening folders into files can make things easier to track and maintain. You can see an example of this in our [cyfi package](https://github.com/drivendataorg/cyfi/tree/main/cyfi). If it's in the template but you don't need it, delete it!
-
-#### Example 2: Expanding
-
-By contrast, we've added more folders to organize module code on more complex projects. A good example of this is our [zamba package](https://github.com/drivendataorg/zamba/tree/master/zamba) for which we've introduced new folders to handle task-specific portions of the codebase.
-
-#### Example 3: Re-organizing
-
-On long-running projects, the `notebooks` folder can get congested. One adaptation we've employed is to add a top-level `research/` folder (and a corresponding `data/research` data folder) that contains sub-folders for individual experiments. These sub-folders can contain their own notebooks, code, and even their own Makefiles that inherit from the parent project `Makefile`.
-
