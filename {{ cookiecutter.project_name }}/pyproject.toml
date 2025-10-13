@@ -2,11 +2,15 @@
 requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
+[tool.hatch.version]
+path = "src/{{cookiecutter.module_name}}/__init__.py"
+
 [tool.hatch.build.hooks.vcs]
 version-file = "src/{{cookiecutter.module_name}}/__init__.py"
 
 [project]
 name = "{{cookiecutter.project_name}}"
+dynamic = ["version"]
 description = "{{cookiecutter.description}}"
 authors = [{ name = "{{cookiecutter.author}}"}]
 readme = "README.md"
